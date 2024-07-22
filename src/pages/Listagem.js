@@ -23,15 +23,17 @@ const Listagem = () => {
   return (
     <div>
         <h1>abas bank</h1>
-        <input></input>
+        <input type='number'placeholder='Digite o codigo do banco'></input>
         <button>Consultar</button>
         <ul>
             {data.map(item => (
             <li key={item.id}> 
-                <p>{'Name: '+ item.name} <br></br>
+                <p>
+                {'Name: '+ item.name} <br></br>
                 {'Code: '+ item.code} <br></br>
                 {'Ispb: ' + item.ipsb} <br></br>
-                {'Full Name: '+ item.fullName}</p>
+                {'Full Name: '+ item.fullName}
+                </p>
             </li>
             ))}
         </ul>

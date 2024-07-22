@@ -1,12 +1,17 @@
+import { Outlet, Link } from "react-router-dom";
+
 function Inicial() {
     return(
         <div>
             <h1>Abas Bank</h1>
             <div>
-                <button>Nova Conta</button>
+                <Link to='listagem'>
+                    <button>Nova Conta</button>
+                </Link>
                 <p>Não existe conta cadastrada</p>
             </div>
-            Contas cadastradas
+            
+            <Outlet />
         </div>
     );
 }
