@@ -12,7 +12,7 @@ function App() {
         <Route >
           <Route index element={<Inicial />} />
           <Route path="listagem" element={<Listagem />} />
-          <Route path="cadastro" element={<Cadastro />} />
+          <Route path="cadastro/:codigo" element={<Cadastro />} />
         </Route>
       </Routes>
     </BrowserRouter>
