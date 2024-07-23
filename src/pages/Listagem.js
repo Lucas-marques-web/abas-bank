@@ -30,6 +30,9 @@ const Listagem = () => {
 
   const handleConsultarBanco = async () =>{
 
+    const listaBancos = document.querySelector('ul');
+    listaBancos.classList.add('active');
+
     try {
         const response = await fetch(`https://brasilapi.com.br/api/banks/v1/${codigoBanco}`);
         if (!response.ok) {
@@ -46,14 +49,13 @@ const Listagem = () => {
 
   return (
     <div>
-        <h1>Abas bank</h1>
-        <input type='number'value={codigoBanco} onChange={handleCodigoBancoChange} placeholder='Digite o codigo do banco'></input>
+        <h1>Abas Bank</h1>
+
+        <input type='number'value={codigoBanco} required  onChange={handleCodigoBancoChange} placeholder='Digite o codigo do banco'></input>
         <button onClick={handleConsultarBanco}>Consultar</button>
-
-        {bancoConsultado && (
+        {bancoConsultado.code && (
         <div className='bancoConsultado'>
-          <h2>Banco Consultado</h2>
-
+          <h3>Banco Consultado</h3>
           <Link to={`/cadastro/${bancoConsultado.code}`}>
             <p>
                 {'Name: '+ bancoConsultado.name} <br></br>
@@ -71,8 +73,6 @@ const Listagem = () => {
                     <p>
                         {'Name: '+ banco.name} <br></br>
                         {'Code: '+ banco.code} 
-                        {/* {'Ispb: ' + banco.ipsb} <br></br>
-                        {'Full Name: '+ banco.fullName} */}
                     </p>
                 </Link>
             </li>
