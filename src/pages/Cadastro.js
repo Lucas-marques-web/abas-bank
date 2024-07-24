@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Cadastro(){
     const pathname = window.location.pathname;
     const partesPathname = pathname.split('/');
     const codigoBanco = partesPathname[2]
-
+   
+    const navigate = useNavigate();
     const [banco, setBanco] = useState([]);
     const [numeroAgencia,setNumeroAgencia] = useState([]);
     const [numeroConta,SetNumberoConta] = useState([]);
@@ -35,11 +36,15 @@ function Cadastro(){
       }
 
 
-      function handleCadastroConta(){
-        console.log(codigoBanco,numeroAgencia,numeroConta)
+      function handleCadastroConta(event){
+        
+        event.preventDefault();
+
         localStorage.setItem('agencia', numeroAgencia);
         localStorage.setItem('conta', numeroConta);
         localStorage.setItem('codigoBanco', codigoBanco);
+        
+        navigate('/');
       }
     
 
@@ -53,12 +58,11 @@ function Cadastro(){
                     {'Ispb: ' + banco.ipsb} <br></br>
                     {'Full Name: '+ banco.fullName}
                 </p>
-                <form>
-                    <input type='number' placeholder='Agencia' value={numeroAgencia} onChange={handleChangeAgencia}></input>
-                    <input type='number' placeholder='conta' value={numeroConta} onChange={handleChangeConta}></input> <br></br>
-                    <Link to='/'>
-                        <button onClick={handleCadastroConta}>Cadastrar Conta</button>
-                    </Link>
+                
+                <form onSubmit={handleCadastroConta}>
+                    <input type='number' placeholder='Agencia' value={numeroAgencia} required onChange={handleChangeAgencia}></input>
+                    <input type='number' placeholder='conta' value={numeroConta} required onChange={handleChangeConta}></input> <br></br>
+                    <button type='submit'>Cadastrar Conta</button>
                 </form>
 
             </div>

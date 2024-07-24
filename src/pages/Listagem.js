@@ -28,7 +28,8 @@ const Listagem = () => {
     setCodigoBanco(event.target.value);
   };
 
-  const handleConsultarBanco = async () =>{
+  const handleConsultarBanco = async (event) =>{
+    event.preventDefault();
 
     const listaBancos = document.querySelector('ul');
     listaBancos.classList.add('active');
@@ -38,6 +39,7 @@ const Listagem = () => {
         if (!response.ok) {
           throw new Error('Banco não encontrado');
         }
+       
         const data = await response.json();
         setBancoConsultado(data);
 
@@ -50,9 +52,10 @@ const Listagem = () => {
   return (
     <div>
         <h1>Abas Bank</h1>
-
-        <input type='number'value={codigoBanco} required  onChange={handleCodigoBancoChange} placeholder='Digite o codigo do banco'></input>
-        <button onClick={handleConsultarBanco}>Consultar</button>
+        <form onSubmit={handleConsultarBanco}>
+            <input type='number'value={codigoBanco} required  onChange={handleCodigoBancoChange} placeholder='Digite o codigo do banco'></input>
+            <button type='submit'>Consultar</button>
+        </form>
         {bancoConsultado.code && (
         <div className='bancoConsultado'>
           <h3>Banco Consultado</h3>
