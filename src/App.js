@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Inicial from './pages/Inicial';
 import Listagem from './pages/Listagem';
 import Cadastro from './pages/Cadastro';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import { Row, Col } from 'react-bootstrap';
+
 
 function Inicial() {
     const [numeroAgencia, setNumeroAgencia] = useState('Não cadastrada');
@@ -44,25 +50,38 @@ function Inicial() {
 
     return (
         <div>
-            <h1>Abas Bank</h1>
-            <div>
-                <Link to='/listagem'>
-                    <button>Nova Conta</button>
-                </Link>
-                {listaBancos.length > 0 ? (
-                    <ul>
+            <Navbar expand="lg" className="bg-body-tertiary">
+                <Container fluid>
+                    <Navbar.Brand ><h1>Abas</h1></Navbar.Brand>
+                    
+                    <Link to='/listagem'>
+                        <Button variant='dark'>Nova Conta</Button>
+                    </Link>
+                </Container>
+            </Navbar>
+            
+           <Container fluid>     
+            {listaBancos.length > 0 ? (
+                    <Row>
                         {listaBancos.map((conta, index) => (
-                            <p key={index}>
-                                Codigo Banco: {conta.codigoBanco} <br />
-                                Numero Agencia: {conta.numeroAgencia} <br />
-                                Numero Conta: {conta.numeroConta}
-                            </p>
+                            <Col key={index} sm={12} md={4} lg={3}>
+                                <Card className='bg-body-tertiary' style={{ margin: '10px' }}>
+                                    <Card.Body>
+                                        <Card.Title>Conta {index + 1}</Card.Title>
+                                        <Card.Text>
+                                            Codigo Banco: {conta.codigoBanco} <br />
+                                            Numero Agencia: {conta.numeroAgencia} <br />
+                                            Numero Conta: {conta.numeroConta}
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
                         ))}
-                    </ul>
+                    </Row>
                 ) : (
                     <p>Nenhuma conta registrada</p>
                 )}
-            </div>
+            </Container>
         </div>
     );
 }
